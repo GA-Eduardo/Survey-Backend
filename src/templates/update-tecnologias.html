@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css" rel="stylesheet">
+
+
+  <title>Update Tecnología</title>
+</head>
+<body>
+   <div class="container-fluid">
+  <div class="form-box efectofadein">
+  <h1 class="dosrem">Update-delete Tecnología </h1>
+
+  <p class="alerta"><strong>{{error}}</strong> </p>
+   {% if dato %}
+  <form action="/update_tecnologia"method="POST">
+   
+    <div class="form-group">
+      <input class="form-control oculto" id="tech_id" style="background: grey;  color:#3b404e" type="text" placeholder="Automatic Id Code" value={{dato.tech_id}} name="tech_id" aria-label="Disabled input example" >
+      <label class="label-up" for="name">Name Tech (Required)</label>
+      <input class="form-control" value="{{dato.tech_name}}" autofocus id="tech_name" type="text" name="tech_name">
+    </div>
+    <div class="form-group">
+      <label class="label-up"for="api-key">Api-key (Required)</label>
+      <input class="form-control" id="tech_apiKey"  value="{{dato.tech_apiKey}}" type="text" name="tech_apiKey">
+    </div>
+    <div class="form-group">
+      <label class="label-up"for="api-key">Zona</label>
+      <input class="form-control" id="tech_zona"  value="{{dato.tech_zona}}" type="text" name="tech_zona">
+    </div>
+    <label class="label-up alerta" for="tech_active">Tech_active(0/1) now is {{dato.tech_active}}</label>
+    <select class="form-control" id="tech_active" name="tech_active" >
+      <option  value="{{active}}">Seleccione...</option>
+      <option>0</option>
+      <option>1</option>
+    </select>
+    
+    <input class="btn btn-primary dosrem" type="submit" value="Submit-Update" />
+    <button type="reset"  onclick="window.location.href='{{ url_for( 'listadoTecnologias') }}'" class="btn btn-secondary pull-right cancel">Cancel</button>
+  <input id="delete" class="btn btn-danger derecha dosrem " type="button" value="Delete" onclick="window.location.href='{{ url_for( 'deleteTecnologia', id=dato.tech_id) }}';" />  
+  </div>
+  </form>
+  {% endif%}
+</div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+
+  
+</body>
+</html>

@@ -1,0 +1,113 @@
+{% extends './base.html' %}
+  
+{%block titulo_url%}
+  <title>Listado de encuestadores</title>
+{%endblock%}  
+{%block Contenido%}
+
+  <div class="container-fluid">
+   
+     <div class="padre ">
+      
+       <div class="hijo">
+        
+         <h1 class="dosrem">GESTION DE ENCUESTADORES (solo admin)</h1>
+         
+          <form action="/listado-busqueda-encuestadores" method="POST">
+         <input id="search"  name="search"  class="form-control" type="text" placeholder="Search ...." autofocus value={{busqueda}}>
+          <button class="oculto" id="botonbuscar" type="submit">submit</button>
+          </form>
+        
+        
+         
+         
+         <div class="padre"> 
+         <button type="reset"   onclick="window.location.href='{{ url_for( 'getapi') }}'"class="btn btn-secondary  corto botonrow">Volver a Menú principal</button>
+          <button type="reset" onclick="window.location.href='{{ url_for( 'formEncuestador') }}'"class="btn btn-outline-secondary  corto botonrow">NUEVO ENCUESTADOR</button>
+          <select class="form-select corto" onchange="if (this.value)window.location.href=this.value" class="form-control fa" style="height:fit-content" id="tech_active" name="tech_active">
+            <option > Ordenar Encuestador....  </option>
+            <option value="{{ url_for( 'ordenAzEncuestador', campo="encuestador_nombre") }}">Orden A-Z</option>
+            <option value="{{ url_for( 'ordenZaEncuestador', campo="encuestador_nombre") }}">Orden Z-A</option>
+          </select>
+        </div>
+ {%block listado%} 
+  <table class="table table-responsive dosrem ">
+    
+     <thead class="alerta">
+        <tr>
+            {% if lista %}
+            <th >Nombre Encuestador</th>
+            <th >Api Key</th>
+            <th >Url logo entidad</th>
+            
+            {% endif %}
+           
+        </tr>
+    </thead>
+    <tbody id="tooltip" >
+       
+        {% for dato in lista %}
+      
+        
+          <tr id='{{dato}}'  onmouseover="mouseOver(id)" onmouseout="mouseOut(id)" onclick="window.location.href='{{ url_for( 'updateEncuestador', id=dato.encuestador_id) }}';" >
+            <td >{{dato.encuestador_nombre}}</td>
+            <td>{{dato.encuestador_apikey}}</td>
+            <td>{{dato.encuestador_logo}}</td>
+          
+        {% endfor %}
+       
+    </tbody>
+</table>
+ {%endblock%}
+</div>
+</div>
+</div>
+<script src="{{url_for('static',filename='js/main.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  
+  <!-- JavaScript Bundle with Popper Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+   <script>
+    
+   new jBox('Mouse', {
+    attach: '#tooltip',
+    animation: { open: 'slide:left', close: 'flip:top' },
+    closeOnClick: true,
+    color: 'blue',
+    theme:'TooltipDark',
+    position: {
+      x: 'right',
+      y: 'center',
+    },
+    content: 'Click to Form Update/Delete',
+  });
+
+  $('#search').on('change keydown keyup paste input', function () {
+    $( '#botonbuscar' ).click ();
+});
+
+$(document).ready(function(){
+ PosEnd(search)
+ 
+});
+
+function PosEnd(end) {
+            var len = end.value.length;
+             
+            // Mostly for Web Browsers
+            if (end.setSelectionRange) {
+                end.focus();
+                end.setSelectionRange(len, len);
+            } else if (end.createTextRange) {
+                var t = end.createTextRange();
+                t.collapse(true);
+                t.moveEnd('character', len);
+                t.moveStart('character', len);
+                t.select();
+            }
+           
+        }
+</script>  
+{%endblock%}

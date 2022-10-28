@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css" rel="stylesheet">
+
+
+  <title>Update encuestador</title>
+</head>
+<body>
+   <div class="container-fluid">
+  <div class="form-box efectofadein">
+  <h1 class="dosrem">Update-delete Encuestador </h1>
+   <button   onclick="window.location.href='{{ url_for( 'listadoEncuestaEspecificas',encuestado=dato.encuestador_id) }}'"class="btn btn-secondary  corto botonrow">Ver todas las encuestas de {{dato.encuestador_nombre}}</button>
+
+  <p class="alerta"><strong>{{error}}</strong> </p>
+   {% if dato %}
+  <form action="/update_encuestador"method="POST">
+   
+    <div class="form-group">
+      <input class="form-control oculto" id="encuestador_id" style="background: grey;  color:#3b404e" type="text" placeholder="Automatic Id Code" value={{dato.encuestador_id}} name="encuestador_id" aria-label="Disabled input example" >
+      <label class="label-up" for="name">Name (Required)</label>
+      <input class="form-control" value="{{dato.encuestador_nombre}}" autofocus id="encuestador_nombre" type="text" name="encuestador_nombre">
+    </div>
+    <div class="form-group">
+      <label class="label-up"for="api-key">Api-key (Required)</label>
+      <input class="form-control" id="encuestador_apikey"  value="{{dato.encuestador_apikey}}" type="text" name="encuestador_apikey">
+    </div>
+    <div class="form-group">
+      <label class="label-up" for="logo">Url_Logo</label>
+      <textarea class="form-control"  id="encuestador_logo" name="encuestador_logo">{{dato.encuestador_logo}}</textarea>
+    </div>
+    <input class="btn btn-primary dosrem" type="submit" value="Submit-Update" />
+    <button type="reset"  onclick="window.location.href='{{ url_for( 'listadoEncuestadores') }}'" class="btn btn-secondary pull-right cancel">Cancel</button>
+  <input id="delete" class="btn btn-danger derecha dosrem " type="button" value="Delete" onclick="window.location.href='{{ url_for( 'deleteEncuestador', id=dato.encuestador_id) }}';" />  
+  </div>
+  </form>
+  {% endif%}
+</div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+
+  
+</body>
+</html>

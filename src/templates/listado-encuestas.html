@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listado de encuestas</title>
+  
+  <!-- Latest compiled and minified CSS Bootstrap-->
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}"> 
+<link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+  <div class="container-fluid">
+   
+     <div class="padre ">
+      
+       <div class="hijo">
+        
+         <h1 class="dosrem">GESTION DE ENCUESTAS DE {{nombre}}</h1>
+         
+          <form action="/listado-encuestas" method="POST">
+         <input id="search"  name="search"  class="form-control" type="text" placeholder="Search ...." autofocus value={{busqueda}}>
+          <button class="oculto" id="botonbuscar" type="submit">submit</button>
+          </form>
+        
+        
+         
+         
+         <div class="padre"> 
+         <button   onclick="window.location.href='{{ url_for( 'getapi') }}'"class="btn btn-secondary  corto botonrow">Volver a Menú principal</button>
+          <button  onclick="window.location.href='{{ url_for( 'formNuevaEncuesta') }}'"class="btn btn-outline-secondary  corto botonrow">NUEVA ENCUESTA</button>
+         <select class="form-select corto" onchange="if (this.value)window.location.href=this.value" class="form-control fa" style="height:fit-content" id="tech_active" name="tech_active">
+      
+              <option> Ordenar Encuesta....</option>
+      <option value="{{ url_for( 'ordenAzEncuesta', campo="encuesta_nombre") }}">Orden A-Z</option>
+      <option value="{{ url_for( 'ordenZaEncuesta', campo="encuesta_nombre") }}">Orden Z-A</option>
+    </select>
+        </div>
+ 
+  <table class="table table-responsive dosrem ">
+    
+ 
+
+    <thead id="tooltipordenar" class="alerta" >
+        <tr>
+            {% if lista %}
+            <th onclick="window.location.href='{{ url_for( 'ordenAzEncuesta', campo="encuesta_nombre") }}';">Nombre de Encuesta</th>
+             <th onclick="window.location.href='{{ url_for( 'ordenAzEncuesta', campo="fecha_inicio") }}';">fecha Inicio</th>
+            <th onclick="window.location.href='{{ url_for( 'ordenAzEncuesta', campo="fecha_fin") }}';">fechafin</th>
+            <th onclick="window.location.href='{{ url_for( 'ordenAzEncuesta', campo="encuesta_pregunta") }}';">Pregunta</th>
+            <th onclick="window.location.href='{{ url_for( 'ordenAzEncuesta', campo="encuesta_observaciones") }}';">Observaciones</th>
+            
+            {% endif %}
+           
+        </tr>
+    </thead>
+    <tbody id="tooltip" >
+      
+        {% for dato in lista %}
+      
+        
+          <tr id='{{dato}}'  onmouseover="mouseOver(id)" onmouseout="mouseOut(id)" onclick="window.location.href='{{ url_for( 'utilidadesEncuesta', id=dato.encuesta_id) }}';" >
+            <td >{{dato.encuesta_nombre}}</td>
+            <td>{{dato.fecha_inicio}}</td>
+            <td>{{dato.fecha_fin}}</td>
+            <td>{{dato.encuesta_pregunta}}</td>
+            <td>{{dato.encuesta_observaciones}}</td>
+          
+        {% endfor %}
+    </tbody>
+</table>
+ 
+
+</div>
+</div>
+</div>
+<script src="{{url_for('static',filename='js/main.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  
+  <!-- JavaScript Bundle with Popper Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+   <script>
+    
+   new jBox('Mouse', {
+    attach: '#tooltip',
+    animation: { open: 'slide:left', close: 'flip:top' },
+    closeOnClick: true,
+    color: 'blue',
+    theme:'TooltipDark',
+    position: {
+      x: 'right',
+      y: 'center',
+    },
+    content: 'Click to manage this survey ',
+  });
+
+  new jBox('Mouse', {
+    attach: '#tooltipordenar',
+    animation: { open: 'slide:left', close: 'flip:top' },
+    closeOnClick: true,
+    color: 'blue',
+    theme:'TooltipDark',
+    position: {
+      x: 'center',
+      y: 'bottom',
+    },
+    content: 'Click Order A-Z',
+  });
+
+  $('#search').on('change keydown keyup paste input', function () {
+    $( '#botonbuscar' ).click ();
+});
+
+$(document).ready(function(){
+ PosEnd(search)
+ 
+});
+
+function PosEnd(end) {
+            var len = end.value.length;
+             
+            // Mostly for Web Browsers
+            if (end.setSelectionRange) {
+                end.focus();
+                end.setSelectionRange(len, len);
+            } else if (end.createTextRange) {
+                var t = end.createTextRange();
+                t.collapse(true);
+                t.moveEnd('character', len);
+                t.moveStart('character', len);
+                t.select();
+            }
+           
+        }
+
+        
+</script>  
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+  
+
+  <title>Formulario nuevo encuestado </title>
+</head>
+<body>
+   <div class="container-fluid">
+  <div class="form-box efectofadein">
+  <h1 class="dosrem">Invitación Encuestado-destinatario. encuesta_id= {{idencuesta}}</h1>
+  <p class="alerta"><strong>{{error}}</strong> </p>
+  <form action="/crear_encuestado" method="POST">
+    
+    <div class="form-group">
+      <label class="label-up"for="email">e-mail (Required)</label>
+      <input class="form-control" id="encuestado_mail" type="email" name="encuestado_mail" autofocus pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
+    </div>
+    <div class="form-group">
+      <label class="label-up" for="logo">Whatsapp</label>
+      <input class="form-control" id="encuestador_wp" name="encuestado_wp">
+    </div>
+     <div class="form-group">
+      <label class="label-up" for="departamento">Departamento</label>
+      <input class="form-control" id="encuestado_departamento" name="encuestado_departamento" required>
+    </div>
+    <div class="form-group">
+      <label class="label-up" for="identificador">Urlinvitacion</label>
+      <textarea class="form-control oculto" id="identificador" name="identificador" >{{identificador}} </textarea>
+      <p class="alerta">{{identificador}}</p>
+    </div>
+    
+    <input class="btn btn-primary dosrem" type="submit" value="Submit" />
+    <button type="reset"  onclick="window.location.href='{{ url_for( 'getapi') }}'"class="btn btn-secondary pull-right">Cancel</button>
+    </div>
+  </form>
+</div>
+</div>
+  
+</body>
+</html>

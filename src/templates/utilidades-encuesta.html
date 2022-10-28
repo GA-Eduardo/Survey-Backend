@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css" rel="stylesheet">
+
+
+  <title>Update encuesta</title>
+</head>
+<body>
+   {% if dato %}
+   <div class="container-fluid">
+  <div class="padre efectofadein">
+     <div class="hijo">
+  <h1 class="dosrem">Manage this survey  </h1>
+  <h2>{{dato.encuesta_nombre}}</h2>
+  <p class="alerta"><strong>{{error}}</strong> </p>
+   <div id="wrap padre">
+                <div >
+                   <button   onclick="window.location.href='{{ url_for( 'formNuevoEncuestado') }}'"class="btn btn-secondary  corto botonrow">Emitir una Invitación unitaria</button>
+                   <button   onclick="window.location.href='{{ url_for( 'updateEncuesta', id=dato.encuesta_id) }}';"class="btn btn-secondary  corto botonrow">Editar encuesta</button>
+                   <button   onclick="window.location.href='{{ url_for( 'listadoInvitaciones', id=dato.encuesta_id) }}';"class="btn btn-secondary  corto botonrow">Listar invitaciones</button>
+                   <button   onclick="window.location.href='{{ url_for( 'listadoRespuestas', id=dato.encuesta_id) }}';"class="btn btn-secondary  corto botonrow">Listar respuestas recibidas</button>
+                  
+                   <div class="botonrow dosrem">
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                   <label class="label-up" style="display:block;color:white"for="fileupload">Subida de paquetes de encuestados/invitaciones</label>
+                     <input type="file" id="fileupload" name="fileupload" accept=".xlsx,.csv" class="rm-input btn btn-secondary  corto botonrow" onchange="selectedFile();"/>
+                          
+                     <div class="blanco" id="fileSize"></div></li>
+                          <div class="blanco" id="fileType"></div></li>
+                          <input id="subir"type="submit" class="btn btn-primary  corto  oculto " value="Subir Archivo invitaciones" onClick="uploadFile()" class="rm-button" /></li>
+                    </form>
+                        </div>
+                    <button type="reset"   onclick="window.location.href='{{ url_for( 'getapi') }}'"class="btn btn-secondary  corto botonrow">Volver a Menú principal</button>
+
+                  </div>
+                
+                
+               
+                
+
+          </div>
+   
+</div>
+</div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+<script src="{{url_for('static',filename='js/main.js')}}"></script>
+  {% endif%}
+</body>
+
+</html>
+  

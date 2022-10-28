@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+  
+
+  <title>Formulario nuevo encuestador</title>
+</head>
+<body>
+   <div class="container-fluid">
+  <div class="form-box efectofadein">
+  <h1 class="dosrem">Alta Nuevo Encuestador</h1>
+  <p class="alerta"><strong>{{error}}</strong> </p>
+  <form action="/crear_encuestador" method="POST">
+    <div class="form-group">
+      <input class="form-control colordisabled" type="text" placeholder="Automatic Id Code" aria-label="Disabled input example" disabled="true">
+      <label class="label-up" for="name">Name (Required)</label>
+      <input class="form-control" autofocus id="encuestador_nombre" type="text" name="encuestador_nombre" required>
+    </div>
+    <div class="form-group">
+      <label class="label-up"for="api-key">Api-key (Required)</label>
+      <input class="form-control" id="encuestador_apikey" type="text" name="encuestador_apikey" required>
+    </div>
+    <div class="form-group">
+      <label class="label-up" for="logo">Url_Logo</label>
+      <textarea class="form-control" id="encuestador_logo" name="encuestador_logo"></textarea>
+    </div>
+    <input class="btn btn-primary dosrem" type="submit" value="Submit" />
+    <button type="reset"  onclick="window.location.href='{{ url_for( 'getapi') }}'"class="btn btn-secondary pull-right">Cancel</button>
+    </div>
+  </form>
+</div>
+</div>
+  
+</body>
+</html>

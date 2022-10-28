@@ -1,0 +1,31 @@
+{% extends './base.html' %}
+  
+{%block titulo_url%}
+  <title>Proyecto SurveyS2T Utilidades</title>
+{%endblock%}  
+
+{%block Contenido%}
+  <div class="container-fluid">
+  <div class="form-box efectofadein">
+  <h1 class="dosrem">Api SurveyS2T Utilidades</h1>
+  <h2 >Login with your Api-Key</h2>
+  {% if mensaje == "no es admin" %}
+    <h3 class="alerta">Debe aportar permisos de Administrador</h3>
+  {% endif %}
+  
+  <p class="alerta"><strong>{{error}}</strong> </p>
+  <form action="/documentacion" method="POST">
+    <div class="form-group">
+      <label class="label-up" for="apiKey">Your ApiKey (Required)</label>
+      <input class="form-control" autofocus id="apiKey" type="password" name="apiKey">
+    </div>
+    
+    <input class="btn btn-primary dosrem" type="submit" value="Submit" />
+    <button type="reset"  onclick="window.location.href='{{ url_for( 'getapi') }}'"class="btn btn-secondary pull-right">Cancel</button>
+
+    </div>
+  </form>
+</div>
+</div>
+  
+{%endblock%}

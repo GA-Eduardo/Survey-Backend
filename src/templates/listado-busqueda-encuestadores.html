@@ -1,0 +1,31 @@
+{% extends './listado-encuestadores.html' %}
+
+{%block listado%} 
+  <table class="table table-responsive dosrem ">
+    
+     <thead class="alerta">
+        <tr>
+            {% if lista %}
+            <th >Nombre Encuestador</th>
+            <th >Api Key</th>
+            <th >Url logo entidad</th>
+            
+            {% endif %}
+           
+        </tr>
+    </thead>
+    <tbody id="tooltip" >
+       
+        {% for dato in lista %}
+      
+        
+          <tr id='{{dato}}'  onmouseover="mouseOver(id)" onmouseout="mouseOut(id)" onclick="window.location.href='{{ url_for( 'updateEncuestador', id=dato.encuestador_id) }}';" >
+            <td >{{dato.encuestador_nombre}}</td>
+            <td>{{dato.encuestador_apikey}}</td>
+            <td>{{dato.encuestador_logo}}</td>
+          
+        {% endfor %}
+       
+    </tbody>
+</table>
+ {%endblock%}

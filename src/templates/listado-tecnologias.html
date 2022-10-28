@@ -1,0 +1,83 @@
+{% extends './base.html' %}
+  
+{%block titulo_url%}
+  <title>Listado de Tecnologías</title>
+{%endblock%}  
+{%block Contenido%}
+
+  <div class="container-fluid">
+   
+     <div class="padre ">
+      
+       <div class="hijo">
+        
+         <h1 class="dosrem">GESTION DE TECNOLOGIAS (solo admin)</h1>
+         
+        
+        
+        
+         
+         
+         <div class="padre"> 
+         <button type="reset"   onclick="window.location.href='{{ url_for( 'getapi') }}'"class="btn btn-secondary  corto botonrow">Volver a Menú principal</button>
+          <button type="reset" onclick="window.location.href='{{ url_for( 'formTecnologias') }}'"class="btn btn-outline-secondary  corto botonrow">NUEVA TECNOLOGIA</button>
+          
+        </div>
+ {%block listado%} 
+  <table class="table table-responsive dosrem ">
+    
+     <thead class="alerta">
+        <tr>
+            {% if lista %}
+            <th >Nombre Tecnología</th>
+            <th >Apikey Tecnología</th>
+            <th >Zona</th>
+            
+            {% endif %}
+           
+        </tr>
+    </thead>
+    <tbody id="tooltip" >
+       
+        {% for dato in lista %}
+      
+        
+          <tr id='{{dato}}'  onmouseover="mouseOver(id)" onmouseout="mouseOut(id)" onclick="window.location.href='{{ url_for( 'updateTecnologia', id=dato.tech_id) }}';" >
+            <td >{{dato.tech_name}}</td>
+            <td>{{dato.tech_apiKey}}</td>
+            <td>{{dato.tech_zona}}</td>
+          
+        {% endfor %}
+       
+    </tbody>
+</table>
+ {%endblock%}
+</div>
+</div>
+</div>
+<script src="{{url_for('static',filename='js/main.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  
+  <!-- JavaScript Bundle with Popper Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+   <script>
+    
+   new jBox('Mouse', {
+    attach: '#tooltip',
+    animation: { open: 'slide:left', close: 'flip:top' },
+    closeOnClick: true,
+    color: 'blue',
+    theme:'TooltipDark',
+    position: {
+      x: 'right',
+      y: 'center',
+    },
+    content: 'Click to Form Update/Delete',
+  });
+
+ 
+
+</script>  
+{%endblock%}

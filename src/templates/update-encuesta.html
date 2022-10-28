@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css" rel="stylesheet">
+
+
+  <title>Update encuesta</title>
+</head>
+<body>
+   <div class="container-fluid">
+  <div class="form-box efectofadein">
+  <h1 class="dosrem">Edit/Delete this survey </h1>
+  
+   {% if dato %}
+  <form action="/update_encuesta"method="POST">
+   
+    <div class="form-group">
+      <input class="form-control oculto" id="encuesta_id" style="background: grey;  color:#3b404e" type="text" placeholder="Automatic Id Code" value={{dato.encuesta_id}} name="encuesta_id" aria-label="Disabled input example" >
+      <label class="label-up" for="encuesta_nombre">Name (Required)</label>
+      <input  value="{{dato.encuesta_nombre}}" autofocus id="encuesta_nombre" type="text" class="form-control" name="encuesta_nombre">
+    </div>
+     <div class="md-form md-outline input-with-post-icon datepicker">
+       <label for="example">Fecha Inicio...</label>
+        <input placeholder="Select date" value="{{dato.fecha_inicio}}" type="date" id="example" name="fecha_inicio" class="form-control">
+       
+    </div>
+    <div class="md-form md-outline input-with-post-icon datepicker ">
+       <label for="example">Fecha fin (faltan validaciones. En desarrollo....)</label>
+        <input placeholder="Select date" value="{{dato.fecha_fin}}" type="date" id="example" name="fecha_fin" class="form-control">
+       
+    </div>
+     <div class="form-group">
+      <label class="label-up" for="encuesta_pregunta">Su pregunta...</label>
+      <textarea class="form-control" id="encuesta_pregunta" type="text" name="encuesta_pregunta" >{{dato.encuesta_pregunta}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="label-up" for="encuesta_observaciones">Contenido privado...</label>
+      <textarea class="form-control" id="encuesta_observaciones" type="text"  name="encuesta_observaciones"  >{{dato.encuesta_observaciones}}</textarea>
+    </div>
+    <input class="btn btn-primary dosrem" type="submit" value="Submit-Update" />
+    <button type="reset"  onclick="window.location.href='{{ url_for( 'listadoEncuestas') }}'" class="btn btn-secondary pull-right cancel">Cancel</button>
+  <input id="delete" class="btn btn-danger derecha dosrem " type="button" value="Delete" onclick="window.location.href='{{ url_for( 'deleteEncuesta', id=dato.encuesta_id) }}';" />  
+  </div>
+  </form>
+  {% endif%}
+</div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+<script src="{{url_for('static',filename='js/main.js')}}"></script>
+  
+</body>
+</html>

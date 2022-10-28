@@ -1,0 +1,48 @@
+{% extends './base.html' %}
+  
+{%block titulo_url%}
+    <title> Zona de cliente</title>
+{%endblock%}  
+
+ {%block Contenido%}
+
+  <div class="container-fluid">
+    <div class="padre efectofadein">
+          <div class="hijo">
+            <h1 >Utilidades para cliente</h1>
+           
+            <h2 class="dosrem">Usuario actual: {{mensaje}}</h2>
+             
+               
+                <div class=" recuadro">
+                   <h4 class=" lucida">login Off y Nueva Encuesta</h4> 
+                  <div class="flex-row">
+                  <button type="button" onclick="window.location.href='{{ url_for( 'loginapi') }}'" class="btn btn-primary boton-form">Login off/in </button>
+                  <button type="button" onclick="window.location.href='{{ url_for( 'formNuevaEncuesta') }}'" class="btn btn-primary boton-form">Alta de Nueva Encuesta</button>
+
+                </div>
+               </div>
+
+                <div class=" recuadro">
+                   <h4 class=" lucida">Gestión de encuestas</h4> 
+                  <div class="flex-row">
+                  <button type="button" onclick="window.location.href='{{ url_for( 'listadoEncuestas') }}'" class="btn btn-primary boton-form">Listado y CRUD de Encuestas </button>
+                  
+                </div>
+               </div>
+
+              
+                
+             
+
+               <br></br>
+               <br></br>
+               <br></br>
+               <br></br>
+               <br></br>
+      
+      </div>
+   
+  </div>
+ 
+ {%endblock%}

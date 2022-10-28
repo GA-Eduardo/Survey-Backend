@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listado de respuestas</title>
+  
+  <!-- Latest compiled and minified CSS Bootstrap-->
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}"> 
+<link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+  <div class="container-fluid">
+   
+     <div class="padre ">
+      
+       <div class="hijo">
+        
+         <h1 class="dosrem">LISTADO DE RESPUESTAS</h1>
+         <h2 class="alerta">Falta programar la busqueda, la ordenación y la edición . </h2>
+         
+              
+         
+         
+         <div class="padre"> 
+         <button   onclick="window.location.href='{{ url_for( 'listadoEncuestas') }}'"class="btn btn-secondary  corto botonrow">Volver a Menú principal</button>
+          <button  onclick="window.location.href='{{ url_for( 'formNuevoEncuestado') }}'"class="btn btn-outline-secondary  corto botonrow">NUEVA INVITACION</button>
+        
+        </div>
+ 
+  <table class="table table-responsive dosrem ">
+    
+ 
+
+    <thead id="tooltipordenar" class="alerta" >
+        <tr>
+            {% if lista %}
+            <th >Fecha Respuesta</th>
+             <th >Archivo de audio</th>
+            <th >Transcripción</th>
+            
+            {% endif %}
+           
+        </tr>
+    </thead>
+    <tbody id="tooltip" >
+      
+        {% for dato in lista %}
+      
+        
+          <tr id='{{dato}}'  onmouseover="mouseOver(id)" onmouseout="mouseOut(id)"  >
+            <td >{{dato.fecha_respuesta}}</td>
+            <td>{{dato.archivoDeAudio}}</td>
+            <td>{{dato.transcripcion}}</td>
+            
+          
+        {% endfor %}
+    </tbody>
+</table>
+ 
+
+</div>
+</div>
+</div>
+<script src="{{url_for('static',filename='js/main.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  
+  <!-- JavaScript Bundle with Popper Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+   <script>
+    
+   new jBox('Mouse', {
+    attach: '#tooltip',
+    animation: { open: 'slide:left', close: 'flip:top' },
+    closeOnClick: true,
+    color: 'blue',
+    theme:'TooltipDark',
+    position: {
+      x: 'right',
+      y: 'center',
+    },
+    content: 'en desarrollo ',
+  });
+
+  new jBox('Mouse', {
+    attach: '#tooltipordenar',
+    animation: { open: 'slide:left', close: 'flip:top' },
+    closeOnClick: true,
+    color: 'blue',
+    theme:'TooltipDark',
+    position: {
+      x: 'center',
+      y: 'bottom',
+    },
+    content: 'en desarrollo',
+  });
+
+  $('#search').on('change keydown keyup paste input', function () {
+    $( '#botonbuscar' ).click ();
+});
+
+$(document).ready(function(){
+ PosEnd(search)
+ 
+});
+
+function PosEnd(end) {
+            var len = end.value.length;
+             
+            // Mostly for Web Browsers
+            if (end.setSelectionRange) {
+                end.focus();
+                end.setSelectionRange(len, len);
+            } else if (end.createTextRange) {
+                var t = end.createTextRange();
+                t.collapse(true);
+                t.moveEnd('character', len);
+                t.moveStart('character', len);
+                t.select();
+            }
+           
+        }
+
+        
+</script>  
+
+</body>
+</html>

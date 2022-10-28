@@ -1,0 +1,64 @@
+
+  {% extends './base.html' %}
+  {%block titulo_url%} <title>Api encuestas mrhouston</title>{% endblock %}
+ 
+  {% block Contenido%}
+   
+  <div class="container-fluid">
+       <div class="padre efectofadein">
+          <div class="hijo">
+            <img src="{{url_for('static', filename='images/presentacion.png')}}" alt="">
+            <h1 class="dosrem">Prototipo Doc. API y varias Utilidades</h1>
+            <hr></hr>
+            <h2 class="dosrem">Usuario actual: {{mensaje}}</h2>
+            <div class="recuadro">
+                <p class="textoapi">http://Url_de_la_api/apikey/encuestas </p>
+                <h4>= (devuelve json de todas las encuestas de un encuestador(TODAS PARA UN API-KEY ADMIN-MRHOUSTON)</h4>
+            </div>
+            <div class="recuadro">
+             <p class="textoapi" >http://Url_de_la_api/apikey/tech </p>
+            <h4>= (devuelve json technologies (servicio exclusivo para api-keys administradores mrhouston)</h4> 
+            </div>
+
+            <div class="recuadro">
+             <p class="textoapi" >http://Url_de_la_api/apikey/encuestadores </p>
+            <h4>= (devuelve json Encuestadores (servicio exclusivo para apis de  administradores de mrhouston)</h4> 
+            </div>
+          
+   
+               
+                <div class=" recuadro">
+                   <h4 class="dosrem lucida">Pruebas Altas con Submit Formularios</h4> 
+                  <div class="flex-row">
+                  <button type="button" onclick="window.location.href='{{ url_for( 'loginapi') }}'" class="btn btn-primary boton-form">Login off/in </button>
+                  <button type="button" onclick="window.location.href='{{ url_for( 'formEncuestador') }}'" class="btn btn-primary boton-form">Alta de Encuestador(solo admin)</button>
+                  <button type="button" onclick="window.location.href='{{ url_for( 'formTecnologias') }}'" class="btn btn-primary boton-form">Alta de Nueva Tecnología(solo con api-key admin)</button>
+                  <button type="button" onclick="window.location.href='{{ url_for( 'formNuevaEncuesta') }}'" class="btn btn-primary boton-form">Alta de Nueva Encuesta</button>
+
+                </div>
+               </div>
+
+                <div class=" recuadro">
+                   <h4 class="dosrem lucida">Pruebas Update and delete con Tablas</h4> 
+                  <div class="flex-row">
+                  <button type="button" onclick="window.location.href='{{ url_for( 'listadoEncuestadores') }}'" class="btn btn-primary boton-form">Listado y CRUD de Encuestadores </button>
+                  <button type="button" onclick="window.location.href='{{ url_for( 'listadoEncuestas') }}'" class="btn btn-primary boton-form">Listado y CRUD de Encuestas </button>
+                  <button type="button" onclick="window.location.href='{{ url_for( 'listadoTecnologias') }}'" class="btn btn-primary boton-form">Listado y CRUD de Tecnologías </button>
+                  
+                </div>
+               </div>
+
+               
+
+               <br></br>
+               <br></br>
+               <br></br>
+               <br></br>
+               <br></br>
+      
+      </div>
+   
+  </div>
+ {% endblock%}
+  
+
