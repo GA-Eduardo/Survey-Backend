@@ -26,7 +26,7 @@ import sys
 
 
 # Configuraciones
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='src/templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://ueqsev5lxkjm8eev:x0EX4LD3oBHjfc6HJK7e@bzkfz4tsdvubijkvi1hd-mysql.services.clever-cloud.com:3306/bzkfz4tsdvubijkvi1hd'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER']="static/uploads"
