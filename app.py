@@ -36,6 +36,9 @@ app.config['AUDIO_FOLDER'] = "static/audios"
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+@app.errorhandler(500)
+def handle_500_error(_error):
+  return app.render('mensaje.html',"error localizado")
 
 
 # VARIABLES GLOBALES (SOLO PARA UTILIDADES)
