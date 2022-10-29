@@ -41,6 +41,11 @@ def handle_503_error(_error):
   return app.render('mensaje.html',"error localizado")
 
 
+@app.errorhandler(500)
+def handle_500_error(_error):
+  return app.render('mensaje.html', "error localizado")
+
+
 # VARIABLES GLOBALES (SOLO PARA UTILIDADES)
 # GLOBAL PARA INPUT BUSCADOR (EN LISTADOS)
 busqueda = None
